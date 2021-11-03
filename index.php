@@ -4,20 +4,35 @@ declare(strict_types=1);
 require 'Message.php';
 require 'Post.php';
 
-$message = new User();
-$post = new Post();
+$message = new Message();
+$title;
+$content;
+$autor;
+$date;
 
-if(isset($_POST['btn'])){
-    $message->getTitle($_POST['title']);
-    $message->getContent($_POST['content']);    
-    $message->getAutor($_POST['autorName']);
-    $message->getDate(date("Y/m/d"));
+if(isset($_POST['btn'])){    
+// get the message of the user
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $autor = $_POST['autorName'];
+    $date = date("d/m/Y");
+
+// send the message to the class Message
+    $message->setTitle($title);
+    $message->setContent($content);    
+    $message->setAutor($autor);
+    $message->setDate($date);
     
-    var_dump($message->getTitle($_POST['title']));
-    var_dump($message->getContent($_POST['content']));
-    var_dump($message->getAutor($_POST['autorName']));
-    var_dump($message->getDate(date("Y/m/d")));
-    
+    $post = new Post($message);
+
+// call the function that create a json file
+    $post->addandcreatjson();
+
+// call the function that save the message of the user in the json file
+    $post->saveData();
+    var_dump($message);
+
+// write the information of the json file in the page
     var_dump($post->writeMessage());
 }
 ?>
