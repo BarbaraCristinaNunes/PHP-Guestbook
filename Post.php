@@ -3,57 +3,55 @@ declare(strict_types=1);
 
 class Post
 {
-    private $message;
-    private $data = "data.json";
-    private $newMessage = [];
-    private $oldMessage = [];
 
-    public function _construct(){
-        
-    }
-
-    // create a json file
-    public function addandcreatjson(){
-        $creatfile = fopen($this->data, 'w');
-    }
-
-    // treat and save the messages in the json file
+    private array $entries;
     
-
-    public function decodeData(){
-        $this->message = $message;
-
-        $readFile = file_get_contents($this->data);
-        $information = json_decode($readFile);
-        $data = array("title" => $this->message[0], "content" => $this->message[1], "autor" => $this->message[2], "date" => $this->message[3]);
-
-        array_unshift($this->newMessage, $data);
-
-        if(isset($information)){
-            $file = file_put_contents("data.json", $this->newMessage);
-            
-        }
-
-        $this->oldMessage = $information;
-    }
-
-    public function encodeData($message){
+    public function _construct(){
        
         
     }
 
+
+    // treat and save the messages in the json file
+    
+
+    public function fillJson($message){
+
+        $information = json_decode(file_get_contents("data.json"));
+        array_unshift($information, $message);
+        // $information[] = $message;
+        file_put_contents("data.json", json_encode($information));
+
+
+        // $array = [];
+        // $information = json_decode(file_get_contents("data.json"));
+        // array_push($array, $information);
+        // array_unshift($array, $message);
+        // // $information[] = $message;
+        // file_put_contents("data.json", json_encode($array));
+
+
+        
+    }
+
+
     // write the json file in the page
     public function writeMessage(){
 
-            $getData = file_get_contents($this->data);
-            $information = json_decode($getData);
+        $information[] = json_decode(file_get_contents("data.json"));
+            var_dump($information);
+            // for($i = 0; $i < count($information); $i++){
+                // for($j = 0; $j < count($information[$i]); $j++){
+                //     echo "<h1>".$information[$i]->[$j]. "</h1><br>";
+                // }
+                // echo <<<_END
+                    echo "<h1>".$information[0][1]->title. "</h1><br>";
+                    // echo "<p>" .$information[$i]->content."</p><br>";
+                    // echo "<p>" .$information[$i]->autor. "</p><br>";
+                    // echo "<p>" .$information[$i]->date. "</p> <br>";
+                // _END;
+            // }
             
-            echo <<<_END
-                <h1> $information->title </h1><br>
-                <p> $information->content </p><br>
-                <p> $information->autor </p><br>
-                <p> $information->date </p>
-            _END;
                 
     }
 
