@@ -4,36 +4,43 @@ declare(strict_types=1);
 require 'Message.php';
 require 'Post.php';
 
-$message = new Message();
-$title;
-$content;
-$autor;
-$date;
 
-if(isset($_POST['btn'])){    
-// get the message of the user
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $autor = $_POST['autorName'];
-    $date = date("d/m/Y");
+function makeComment(){
+    if(isset($_POST['btn'])){  
+        $message = new Message();
+        $title;
+        $content;
+        $autor;
+        $date; 
 
-// send the message to the class Message
-    $message->setTitle($title);
-    $message->setContent($content);    
-    $message->setAutor($autor);
-    $message->setDate($date);
+    // get the message of the user
+        $title = htmlspecialchars($_POST['title']);
+        $content = htmlspecialchars($_POST['content']);
+        $autor = htmlspecialchars($_POST['autorName']);
+        $date = date("d-m-Y");
+
+    // send the message to the class Message
+        $message->setTitle($title);
+        // $message->getTitle($title);
+        $message->setContent($content);    
+        $message->setAutor($autor);
+        $message->setDate($date);
+        $array = $message->getArray();
+  
     
-    $post = new Post($message);
+        $post = new Post();
+   
 
-// call the function that create a json file
-    $post->addandcreatjson();
+    // call the function that create a json file
+        $post->addandcreatjson();
 
-// call the function that save the message of the user in the json file
-    $post->saveData();
-    var_dump($message);
+    // call the function that save the message of the user in the json file
+        $post->saveData($array);
+    
 
-// write the information of the json file in the page
-    var_dump($post->writeMessage());
+    // write the information of the json file in the page
+        $post->writeMessage();
+    }
 }
 ?>
 
@@ -72,6 +79,9 @@ if(isset($_POST['btn'])){
                     <div class="form-col-6">
                         <button type="submit" class="btn btn-primary" name="btn">Send message </button>
                     </div>                
+                </div>
+                <div class="form-row text-center">
+                    <?php makeComment(); ?>
                 </div>
             </div>
         
