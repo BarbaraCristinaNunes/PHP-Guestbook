@@ -25,18 +25,18 @@ function makeComment(){
         $message->setContent($content);    
         $message->setAutor($autor);
         $message->setDate($date);
-        $array = $message->getArray();
-  
+        $array = $message->makeArray();
     
         $post = new Post();
+        $post->fillJson($array);
    
 
     // call the function that create a json file
-        $post->addandcreatjson();
+        // $post->addandcreatjson();
 
     // call the function that save the message of the user in the json file
-        $post->saveData($array);
     
+        // $post->encodeData($array);
 
     // write the information of the json file in the page
         $post->writeMessage();
