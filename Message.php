@@ -7,12 +7,12 @@ class Message
     private $content;
     private $autor;
     private $date;
+    private array $test=[];
 
     public function _construct () {
-       
+      
     }
-
-    
+  
 
     public function setTitle($title){
         $this->title = $title;
@@ -22,13 +22,18 @@ class Message
     {
         return $this->title;
     }
+    public function getArray()
+    {
+        $this->test = [$this->title, $this->content, $this->autor, $this->date];
+        return $this->test;
+    }
 
     public function setContent($content){
         $this->content = $content;        
     }
 
     public function getContent(){
-        return $this->title;
+        return $this->content;
     }
 
     public function setAutor($autor){
@@ -36,7 +41,7 @@ class Message
     }
     
     public function getAutor(){
-        return $this->title;
+        return $this->autor;
     }
 
     public function setDate($date){
@@ -44,7 +49,7 @@ class Message
     }
 
     public function getDate(){
-        return $this->title;
+        return $this->date;
     }
 
 }
