@@ -22,9 +22,9 @@ class Message
     {
         return $this->title;
     }
-    public function getArray()
+    public function makeArray()
     {
-        $this->test = [$this->title, $this->content, $this->autor, $this->date];
+        $this->test = ["title" => $this->title, "content" => $this->content, "autor" => $this->autor, "date" => $this->date];
         return $this->test;
     }
 
