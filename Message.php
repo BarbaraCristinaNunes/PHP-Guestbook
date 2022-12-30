@@ -9,11 +9,13 @@ class Message
     private $date;
     private array $test=[];
 
-    public function _construct () {
-      
+    public function __construct ($title, $content, $autor, $date) {
+        $this->setTitle($title);
+        $this->setContent($content);
+        $this->setAutor($autor);
+        $this->setDate($date);
     }
   
-
     public function setTitle($title){
         $this->title = $title;
     }

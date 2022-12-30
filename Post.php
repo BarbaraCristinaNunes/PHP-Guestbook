@@ -6,7 +6,7 @@ class Post
 
     private array $entries;
     
-    public function _construct(){
+    public function __construct(){
        
         
     }
@@ -38,19 +38,14 @@ class Post
     // write the json file in the page
     public function writeMessage(){
 
-        $information[] = json_decode(file_get_contents("data.json"));
-            var_dump($information);
-            // for($i = 0; $i < count($information); $i++){
-                // for($j = 0; $j < count($information[$i]); $j++){
-                //     echo "<h1>".$information[$i]->[$j]. "</h1><br>";
-                // }
-                // echo <<<_END
-                    echo "<h1>".$information[0][1]->title. "</h1><br>";
-                    // echo "<p>" .$information[$i]->content."</p><br>";
-                    // echo "<p>" .$information[$i]->autor. "</p><br>";
-                    // echo "<p>" .$information[$i]->date. "</p> <br>";
-                // _END;
-            // }
+        $information = json_decode(file_get_contents("data.json"));
+            // var_dump($information);
+            for($i = 0; $i < count($information); $i++){
+                echo "<h1>".$information[$i]->title. "</h1><br>";
+                echo "<p>" .$information[$i]->content."</p><br>";
+                echo "<p>" .$information[$i]->autor. "</p><br>";
+                echo "<p>" .$information[$i]->date. "</p> <br>";
+            }
             
                 
     }

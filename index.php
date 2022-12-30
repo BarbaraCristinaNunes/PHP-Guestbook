@@ -7,40 +7,31 @@ require 'Post.php';
 
 function makeComment(){
     if(isset($_POST['btn'])){  
-        $message = new Message();
         $title;
         $content;
         $autor;
         $date; 
 
-    // get the message of the user
+        // get the message of the user
         $title = htmlspecialchars($_POST['title']);
         $content = htmlspecialchars($_POST['content']);
         $autor = htmlspecialchars($_POST['autorName']);
         $date = date("d-m-Y");
 
-    // send the message to the class Message
-        $message->setTitle($title);
-        // $message->getTitle($title);
-        $message->setContent($content);    
-        $message->setAutor($autor);
-        $message->setDate($date);
+        // send the message to the class Message
+        $message = new Message($title, $content, $autor, $date);
+        // var_dump($message);
         $array = $message->makeArray();
     
         $post = new Post();
         $post->fillJson($array);
    
 
-    // call the function that create a json file
-        // $post->addandcreatjson();
-
-    // call the function that save the message of the user in the json file
-    
-        // $post->encodeData($array);
-
-    // write the information of the json file in the page
+        // write the information of the json file in the page
         $post->writeMessage();
+
     }
+    // $_POST = array();
 }
 ?>
 
